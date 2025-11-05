@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <stdio.h> 
+#include "push_swap.h"
 
 char	find_in_index(char *base, int indicator)
 {

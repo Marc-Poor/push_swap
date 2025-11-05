@@ -32,6 +32,7 @@ typedef struct s_list
 int					error_output(char *base, int disaine);
 int					ft_strlen(char *str);
 int					ft_atoi(char *str);
+char				*ft_itoa_base(long nbr, char *base);
 t_list				*ft_lstnew(void *content, int number);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);

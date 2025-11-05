@@ -5,7 +5,12 @@
 SRC     =	main.c			\
 			ft_strlen.c		\
 			ft_atoi_base.c	\
-			ft_itoa_base.c
+			ft_atoi.c		\
+			ft_itoa_base.c	\
+			ft_lstnew.c		\
+			ft_lstadd_back.c	\
+			ft_lstsize.c	\
+			ft_lstlast.c
 
 OBJ		=	$(SRC:.c=.o)
 
