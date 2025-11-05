@@ -6,7 +6,7 @@
 /*   By: mfaure <mfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:33:12 by mfaure            #+#    #+#             */
-/*   Updated: 2025/11/05 18:35:45 by mfaure           ###   ########.fr       */
+/*   Updated: 2025/11/05 18:53:11 by mfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ char	*calculate_place(t_list *list_a, int new_nbr)
 	int	place;
 
 	place = 0;
-	while (list_a->next)
+	t_list *tmp = list_a;
+	while (tmp)
 	{
-		if (list_a->number > new_nbr)
-			list_a->content = ft_itoa_base(ft_atoi(list_a->content) + 1,
-					"0123456789");
-		if (list_a->number < new_nbr == 0)
-			place++;
-		list_a = list_a->next;
+	    if (tmp->number < new_nbr)
+            place++;
+		tmp = tmp->next;
 	}
 	return (ft_itoa_base(place, "0123456789"));
 }
@@ -202,12 +200,13 @@ int	main(int ac, char **av)
 	}
 	if (in_order(av, 2, ac) == 0)
 		return (0);
-	list_a = ft_lstnew("0", ft_atoi(av[i]));
+	list_a = NULL;
 	while (av[i])
 	{
-		ft_lstadd_back(&list_a, ft_lstnew(calculate_place(list_a,
-					ft_atoi(av[i])), ft_atoi(av[i])));
-		i++;
+	    ft_lstadd_back(&list_a,
+	        ft_lstnew(calculate_place(list_a, ft_atoi(av[i])), ft_atoi(av[i]))
+	    );
+	    i++;
 	}
 	binary_converter(list_a);
 	i = find_biggest(list_a, 0);
@@ -216,6 +215,48 @@ int	main(int ac, char **av)
 }
 
 /*
+
+	list_a = ft_lstnew("0", ft_atoi(av[i]));
+	while (av[i])
+	{
+		ft_lstadd_back(&list_a, ft_lstnew(calculate_place(list_a,
+					ft_atoi(av[i])), ft_atoi(av[i])));
+		i++;
+	}
+
+
+char	*calculate_place(t_list *list_a, int new_nbr)
+{
+	int	place;
+
+	place = 0;
+	while (list_a->next)
+	{
+		if (list_a->number > new_nbr)
+			list_a->content = ft_itoa_base(ft_atoi(list_a->content) + 1,
+					"0123456789");
+		if (list_a->number < new_nbr == 0)
+			place++;
+		list_a = list_a->next;
+	}
+	return (ft_itoa_base(place, "0123456789"));
+}
+
+char	*calculate_place(t_list *list_a, int new_nbr)
+{
+	int	place;
+
+	place = 0;
+	t_list *tmp = list_a;
+	while (tmp)
+	{
+	    if (tmp->number < new_nbr)
+            place++;
+		tmp = tmp->next;
+	}
+	return (ft_itoa_base(place, "0123456789"));
+}
+
 
 void	sort_list(t_list **list_a, t_list **list_b, int i)
 {
