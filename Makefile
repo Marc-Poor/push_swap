@@ -7,6 +7,7 @@ SRC     =	main.c			\
 			ft_atoi_base.c	\
 			ft_atoi.c		\
 			ft_itoa_base.c	\
+			ft_isdigit.c	\
 			ft_lstnew.c		\
 			ft_lstadd_back.c	\
 			ft_lstsize.c	\

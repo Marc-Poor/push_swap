@@ -6,7 +6,7 @@
 /*   By: mfaure <mfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:10:42 by mfaure            #+#    #+#             */
-/*   Updated: 2025/11/04 14:13:10 by mfaure           ###   ########.fr       */
+/*   Updated: 2025/11/05 15:50:45 by mfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <strings.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -32,6 +33,7 @@ typedef struct s_list
 int					error_output(char *base, int disaine);
 int					ft_strlen(char *str);
 int					ft_atoi(char *str);
+int					ft_isdigit(int c);
 char				*ft_itoa_base(long nbr, char *base);
 t_list				*ft_lstnew(void *content, int number);
 t_list				*ft_lstlast(t_list *lst);
