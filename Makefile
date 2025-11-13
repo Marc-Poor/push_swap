@@ -8,6 +8,9 @@ SRC     =	main.c			\
 			ft_atoi.c		\
 			ft_itoa_base.c	\
 			ft_isdigit.c	\
+			pre_sort_checker.c	\
+			sort_list.c	\
+			permutations.c	\
 			ft_lstnew.c		\
 			ft_lstadd_back.c	\
 			ft_lstsize.c	\

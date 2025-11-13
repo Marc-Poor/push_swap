@@ -6,7 +6,7 @@
 /*   By: mfaure <mfaure@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:10:42 by mfaure            #+#    #+#             */
-/*   Updated: 2025/11/05 15:50:45 by mfaure           ###   ########.fr       */
+/*   Updated: 2025/11/13 19:25:47 by mfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@ int					error_output(char *base, int disaine);
 int					ft_strlen(char *str);
 int					ft_atoi(char *str);
 int					ft_isdigit(int c);
+int					error_value(char **av, int y, int x);
+int					compare(char **av, int ac);
+int					in_order(char **av, int i, int ac);
+void				radix_loop(t_list **list_a, t_list **list_b, int biggest);
 char				*ft_itoa_base(long nbr, char *base);
+void				do_pb(t_list **list_a, t_list **list_b);
+void				do_pa(t_list **list_a, t_list **list_b);
+void				do_ra(t_list **list_a);
 t_list				*ft_lstnew(void *content, int number);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);
