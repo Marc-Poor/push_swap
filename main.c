@@ -40,25 +40,65 @@ void	assign_ranks(t_list *list)
 // for (t_list *tmp = list_a; tmp; tmp = tmp->next)
 //	printf("%d %s\n", tmp->number, (char *)tmp->content);
 
-void    sort3(t_list *list_a)
+void push_smallest_two(t_list **a, t_list **b)
 {
-    int        x;
-    int        y;
-    int        z;
+    while (ft_lstsize(*a) > 3)
+    {
+        int rank = ft_atoi((*a)->content);
 
-    x = list_a->number;
-    y = list_a->next->number;
-    z = list_a->next->next->number;
+        if (rank == 0 || rank == 1)
+            do_pb(a, b);
+        else
+            do_ra(a);
+    }
+}
+
+void push_back_two(t_list **a, t_list **b)
+{
+    int top = ft_atoi((*b)->content);
+
+    if (top == 0)
+    {
+        do_pa(a, b);
+        do_pa(a, b);
+		do_sa(a);
+    }
+    else
+    {
+        do_pa(a, b);
+        do_pa(a, b);
+    }
+}
+
+void sort_three(t_list **a)
+{
+    int x;
+    int y;
+    int z;
+
+    x = ft_atoi((*a)->content);
+    y = ft_atoi((*a)->next->content);
+    z = ft_atoi((*a)->next->next->content);
     if (x > y && y < z && x < z)
-        write(1, "sa\n", 3);
-    if (x > y && y > z)
-        write(1, "sa\nrra\n", 7);
-    if (x > y && y < z && x > z)
-        write(1, "ra\n", 3);
-    if (x < y && y > z && x < z)
-        write(1, "sa\nra\n", 6);
-    if (x < y && y > z && x > z)
-        write(1, "rra\n", 4);
+        do_sa(a);
+    else if (x > y && y > z)
+        { do_sa(a); do_rra(a); }
+    else if (x > y && y < z && x > z)
+        do_ra(a);
+    else if (x < y && y > z && x < z)
+    { 
+		do_sa(a); 
+		do_ra(a);
+	}
+    else if (x < y && y > z && x > z)
+        do_rra(a);
+}
+
+void sort_five(t_list **a, t_list **b)
+{
+    push_smallest_two(a, b);
+    sort_three(a);
+    push_back_two(a, b);
 }
 
 void	binary_converter(t_list *list_a)
@@ -97,10 +137,7 @@ int	main(int ac, char **av)
 	if (ac < 3 || !av || !av[0])
 		return (0);
 	if (!error_value(av, 1, 0) || !compare(av, ac))
-	{
-		write(2, "Error\n", 6);
-		return (0);
-	}
+		return (write(2, "Error\n", 6));
 	if (in_order(av, 2, ac) == 0)
 		return (0);
 	list_a = NULL;
@@ -112,21 +149,20 @@ int	main(int ac, char **av)
 		i++;
 	}
 	if (ac == 3)
-	{
-		if (list_a->next->number < list_a->number)
-			write(1, "sa\n", 3);
-		return (0);
-	}
+		return (write(1, "sa\n", 3));
 	if (ac == 4)
 	{
-		sort3(list_a);
+		sort_three(&list_a);
 		return 0;
 	}
 	assign_ranks(list_a);
+	if (ac == 5 || ac == 6)		
+	{
+		sort_five(&list_a, &list_b);
+		return 0;
+	}
 	binary_converter(list_a);
 	i = find_biggest(list_a, 0);
-	if (ac == 5 || ac == 6)
-		
 	radix_loop(&list_a, &list_b, i);
 	return (0);
 }

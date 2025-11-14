@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 
+int	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (write(1, s, i));
+}
+
 void	do_pb(t_list **list_a, t_list **list_b)
 {
 	t_list	*tmp;
@@ -22,7 +32,7 @@ void	do_pb(t_list **list_a, t_list **list_b)
 	*list_a = (*list_a)->next;
 	tmp->next = *list_b;
 	*list_b = tmp;
-	printf("pb\n");
+	ft_putstr("pb\n");
 }
 
 void	do_pa(t_list **list_a, t_list **list_b)
@@ -35,7 +45,7 @@ void	do_pa(t_list **list_a, t_list **list_b)
 	*list_b = (*list_b)->next;
 	tmp->next = *list_a;
 	*list_a = tmp;
-	printf("pa\n");
+	ft_putstr("pa\n");
 }
 
 void	do_ra(t_list **list_a)
@@ -52,9 +62,38 @@ void	do_ra(t_list **list_a)
 	while (last->next)
 		last = last->next;
 	last->next = first;
-	printf("ra\n");
+	ft_putstr("ra\n");
 }
 
+void do_rra(t_list **a) 
+{
+    t_list *tmp;
+    t_list *last;
+
+    if (!*a || !(*a)->next)
+		return ;
+    tmp = *a;
+    while (tmp->next->next)
+		tmp = tmp->next;
+    last = tmp->next;
+    tmp->next = NULL;
+    last->next = *a;
+    *a = last;
+    ft_putstr("rra\n");
+}
+
+void do_sa(t_list **a)
+{
+    t_list *b;
+
+    if (!*a || !(*a)->next)
+		return ;
+	b = (*a)->next;
+    (*a)->next = b->next;
+    b->next = *a;
+    *a = b;
+	ft_putstr("sa\n");
+}
 /*
 void	do_pa(t_list **list_a, t_list **list_b)
 {
