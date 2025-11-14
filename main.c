@@ -42,9 +42,11 @@ void	assign_ranks(t_list *list)
 
 void push_smallest_two(t_list **a, t_list **b)
 {
+	int rank;
+
     while (ft_lstsize(*a) > 3)
     {
-        int rank = ft_atoi((*a)->content);
+        rank = ft_atoi((*a)->content);
 
         if (rank == 0 || rank == 1)
             do_pb(a, b);
@@ -55,9 +57,10 @@ void push_smallest_two(t_list **a, t_list **b)
 
 void push_back_two(t_list **a, t_list **b)
 {
-    int top = ft_atoi((*b)->content);
+    int top;
 
-    if (top == 0)
+	top = ft_atoi((*b)->content);
+    if ((top == 0 && ft_lstsize(*b) == 2) | (ft_lstsize(*b) == 1 && top == 1))
     {
         do_pa(a, b);
         do_pa(a, b);
@@ -97,7 +100,7 @@ void sort_three(t_list **a)
 void sort_five(t_list **a, t_list **b)
 {
     push_smallest_two(a, b);
-    sort_three(a);
+	sort_three(a);
     push_back_two(a, b);
 }
 
